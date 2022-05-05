@@ -10,12 +10,10 @@ export default function DashBoard() {
   const dispatchUpdateCount = useDispatchUpdateCount();
   const count2 = useCount2();
   const dispatchUpdateCount2 = useDispatchUpdateCount2();
-  // console.log(">> count", count);
-  // console.log(">> theme", count2);
 
   return (
-    <div>
-      <div>
+    <div style={{ display: "flex", flexDirection: "column", marginLeft: 100 }}>
+      <div style={{ display: "flex" }}>
         <button
           onClick={() => {
             dispatchUpdateCount(count + 1);
@@ -23,9 +21,9 @@ export default function DashBoard() {
         >
           button1
         </button>
-        <p> {count}</p>
+        <p style={{ width: 200 }}> {count}</p>
       </div>
-      <div>
+      <div style={{ display: "flex" }}>
         <button
           onClick={() => {
             dispatchUpdateCount2({ ...count2, value: count2.value + 1 });
@@ -33,7 +31,21 @@ export default function DashBoard() {
         >
           button2
         </button>
-        <p> {count2.value}</p>
+        <p style={{ width: 200 }}> {count2.value}</p>
+        <p
+          style={{ width: 200 }}
+          onClick={() => {
+            dispatchUpdateCount2({
+              ...count2,
+              status: {
+                ...count2.status,
+                isValid: !count2.status.isValid,
+              },
+            });
+          }}
+        >
+          {count2.status.isValid ? "打开" : "关闭"}
+        </p>
       </div>
     </div>
   );

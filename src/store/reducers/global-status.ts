@@ -9,6 +9,7 @@ export interface IComplicatedCount {
   value: number;
   status: {
     isValid: boolean;
+    name: string;
   };
 }
 export interface IGlobalStatus {
@@ -22,6 +23,7 @@ const initStatus: IGlobalStatus = {
     value: 100,
     status: {
       isValid: false,
+      name: "test",
     },
   },
 };
