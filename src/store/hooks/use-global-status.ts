@@ -1,4 +1,4 @@
-import { GlobalActionType } from "../reducers/global-status";
+import { GlobalActionType, IComplicatedCount } from "../reducers/global-status";
 import { useDispatchStore, useStore } from "./use-store";
 
 export const useCount = () => {
@@ -9,9 +9,9 @@ export const useDispatchUpdateCount = () =>
   useDispatchStore<number, GlobalActionType>(GlobalActionType.UPDATE_COUNT);
 
 
-export const useTheme = () => {
-  return useStore((state) => state.globalStatus.theme);
+export const useCount2 = () => {
+  return useStore((state) => state.globalStatus.count2);
 };
 
-export const useDispatchUpdateTheme = () =>
-  useDispatchStore<string, GlobalActionType>(GlobalActionType.UPDATE_THEME);
+export const useDispatchUpdateCount2 = () =>
+  useDispatchStore<IComplicatedCount, GlobalActionType>(GlobalActionType.UPDATE_COUNT2);

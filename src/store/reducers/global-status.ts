@@ -2,17 +2,28 @@ import { IStoreAction } from "../action";
 
 export const enum GlobalActionType {
   UPDATE_COUNT = "UPDATE-COUNT",
-  UPDATE_THEME = "UPDATE-THEME"
+  UPDATE_COUNT2 = "UPDATE-COUNT2",
 }
 
+export interface IComplicatedCount {
+  value: number;
+  status: {
+    isValid: boolean;
+  };
+}
 export interface IGlobalStatus {
   count: number;
-  theme: string;
+  count2: IComplicatedCount;
 }
 
 const initStatus: IGlobalStatus = {
   count: 0,
-  theme: 'dark'
+  count2: {
+    value: 100,
+    status: {
+      isValid: false,
+    },
+  },
 };
 
 export const globalStatusReducer = (
@@ -24,11 +35,9 @@ export const globalStatusReducer = (
       return { ...state, count: action.payload };
     }
 
-
-    case GlobalActionType.UPDATE_THEME: {
-      return { ...state, theme: action.payload };
+    case GlobalActionType.UPDATE_COUNT2: {
+      return { ...state, count2: action.payload };
     }
-
 
     default:
       return state;
