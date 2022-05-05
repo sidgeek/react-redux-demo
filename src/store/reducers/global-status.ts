@@ -1,4 +1,5 @@
 import { IStoreAction } from "../action";
+import { produce } from "immer";
 
 export const enum GlobalActionType {
   UPDATE_COUNT = "UPDATE-COUNT",
@@ -30,43 +31,32 @@ const initStatus: IGlobalStatus = {
   },
 };
 
-export const globalStatusReducer = (
+export const globalStatusReducer = produce((
   state: IGlobalStatus = initStatus,
   action: IStoreAction<GlobalActionType>
 ): IGlobalStatus => {
   switch (action.type) {
     case GlobalActionType.UPDATE_COUNT: {
-      return { ...state, count: action.payload };
+      state.count = action.payload
+      return state
     }
 
     case GlobalActionType.UPDATE_COUNT2: {
-      return { ...state, count2: action.payload };
+      state.count2 = action.payload
+      return state
     }
 
     case GlobalActionType.UPDATE_COUNT2_VALUE: {
-      return {
-        ...state,
-        count2: {
-          ...state.count2,
-          value: action.payload,
-        },
-      };
+       state.count2.value = action.payload
+       return state
     }
 
     case GlobalActionType.UPDATE_COUNT2_STATUS: {
-      return {
-        ...state,
-        count2: {
-          ...state.count2,
-          status: {
-            ...state.count2.status,
-            isValid: action.payload,
-          },
-        },
-      };
+      state.count2.status.isValid = action.payload
+      return state
     }
 
     default:
       return state;
   }
-};
+}, initStatus);
