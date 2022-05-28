@@ -31,10 +31,11 @@ const initStatus: IGlobalStatus = {
   },
 };
 
-export const globalStatusReducer = produce((
-  draft: IGlobalStatus = initStatus,
-  action: IStoreAction<GlobalActionType>
-): IGlobalStatus => {
+export const globalStatusReducer = produce(
+  (
+    draft: IGlobalStatus = initStatus,
+    action: IStoreAction<GlobalActionType>
+  ): IGlobalStatus => {
     switch (action.type) {
       case GlobalActionType.UPDATE_COUNT: {
         draft.count = action.payload;
@@ -57,6 +58,6 @@ export const globalStatusReducer = produce((
       }
     }
 
-    return draft
-  }
-)
+    return draft;
+  }, initStatus
+);

@@ -10,7 +10,7 @@ export const Count1Context = createContext<ICount1Context>({
   setCount: () => {},
 });
 
-export const CountProvider = (props: any) => {
+export const Count1Provider = (props: any) => {
   const [count, setCount] = useState<number>(0);
 
   const context1 = {
