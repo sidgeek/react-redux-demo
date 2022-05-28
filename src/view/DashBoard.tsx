@@ -1,14 +1,17 @@
 import {
-  useCount,
-  useDispatchUpdateCount,
+  // useCount,
+  // useDispatchUpdateCount,
   useCount2,
   useDispatchUpdateCount2Value,
   useDispatchUpdateCount2Status
 } from "../store/hooks/use-global-status";
+import Demo1 from './Demo1'
+import Demo2 from './Demo2'
+import Demo3 from './Demo3'
 
 export default function DashBoard() {
-  const count = useCount();
-  const dispatchUpdateCount = useDispatchUpdateCount();
+  // const count = useCount();
+  // const dispatchUpdateCount = useDispatchUpdateCount();
   const count2 = useCount2();
   const dispatchUpdateCount2Value = useDispatchUpdateCount2Value();
   const dispatchUpdateCount2Status = useDispatchUpdateCount2Status();
@@ -16,7 +19,7 @@ export default function DashBoard() {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", marginLeft: 100 }}>
-      <div style={{ display: "flex" }}>
+      {/* <div style={{ display: "flex" }}>
         <button
           onClick={() => {
             dispatchUpdateCount(count + 1);
@@ -25,7 +28,7 @@ export default function DashBoard() {
           button1
         </button>
         <p style={{ width: 200 }}> {count}</p>
-      </div>
+      </div> */}
       <div style={{ display: "flex" }}>
         <button
           onClick={() => {
@@ -44,6 +47,10 @@ export default function DashBoard() {
           {count2.status.isValid ? "打开" : "关闭"}
         </p>
       </div>
+
+      <Demo1 />
+      <Demo2 />
+      <Demo3 />
     </div>
   );
 }

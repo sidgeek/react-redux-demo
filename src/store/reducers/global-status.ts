@@ -31,32 +31,30 @@ const initStatus: IGlobalStatus = {
   },
 };
 
-export const globalStatusReducer = produce((
+export const globalStatusReducer = (
   state: IGlobalStatus = initStatus,
   action: IStoreAction<GlobalActionType>
-): IGlobalStatus => {
-  switch (action.type) {
-    case GlobalActionType.UPDATE_COUNT: {
-      state.count = action.payload
-      return state
-    }
+): IGlobalStatus =>
+  produce(state, (draft) => {
+    switch (action.type) {
+      case GlobalActionType.UPDATE_COUNT: {
+        draft.count = action.payload;
+        break;
+      }
 
-    case GlobalActionType.UPDATE_COUNT2: {
-      state.count2 = action.payload
-      return state
-    }
+      case GlobalActionType.UPDATE_COUNT2: {
+        draft.count2 = action.payload;
+        break;
+      }
 
-    case GlobalActionType.UPDATE_COUNT2_VALUE: {
-       state.count2.value = action.payload
-       return state
-    }
+      case GlobalActionType.UPDATE_COUNT2_VALUE: {
+        draft.count2.value = action.payload;
+        break;
+      }
 
-    case GlobalActionType.UPDATE_COUNT2_STATUS: {
-      state.count2.status.isValid = action.payload
-      return state
+      case GlobalActionType.UPDATE_COUNT2_STATUS: {
+        draft.count2.status.isValid = action.payload;
+        break;
+      }
     }
-
-    default:
-      return state;
-  }
-}, initStatus);
+  });
