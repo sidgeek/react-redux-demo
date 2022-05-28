@@ -1,4 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useCallback } from "react";
+
+export interface ICountState {
+  count3: number;
+  count4: number;
+}
 
 export interface ICountContext {
   count3: number;
@@ -14,14 +19,35 @@ export const CountContext = createContext<ICountContext>({
   setCount4: () => {},
 });
 
+function reducer(state: ICountState, action: any) {
+  let newState;
+  switch (action.type) {
+    case "count3":
+      newState = { ...state, count3: state.count3 + 1 };
+      break;
+    case "count4":
+      newState = { ...state, count4: state.count4 + 1 };
+      break;
+    default:
+      throw new Error();
+  }
+  return newState;
+}
+
 export const CountProvider = (props: any) => {
-  const [count3, setCount3] = useState<number>(0);
-  const [count4, setCount4] = useState<number>(0);
+  const [count, dispatch] = useReducer(reducer, { count3: 0, count4: 0 });
+
+  const setCount3 = useCallback(() => {
+    dispatch({ type: "count3" });
+  }, []);
+
+  const setCount4 = useCallback(() => {
+    dispatch({ type: "count4" });
+  }, []);
 
   const context = {
-    count3,
+    ...count,
     setCount3,
-    count4,
     setCount4,
   };
 
