@@ -1,4 +1,5 @@
 import { createContext, useReducer, useCallback } from "react";
+import { produce } from "immer";
 
 export interface ICountState {
   count3: number;
@@ -19,20 +20,17 @@ export const CountContext = createContext<ICountContext>({
   setCount4: () => {},
 });
 
-function reducer(state: ICountState, action: any) {
-  let newState;
-  switch (action.type) {
-    case "count3":
-      newState = { ...state, count3: state.count3 + 1 };
-      break;
-    case "count4":
-      newState = { ...state, count4: state.count4 + 1 };
-      break;
-    default:
-      throw new Error();
-  }
-  return newState;
-}
+const reducer = (state: ICountState, action: any) =>
+  produce(state, (draft) => {
+    switch (action.type) {
+      case "count3":
+        draft.count3 = state.count3 + 1;
+        break;
+      case "count4":
+        draft.count4 = state.count4 + 1;
+        break;
+    }
+  });
 
 export const CountProvider = (props: any) => {
   const [count, dispatch] = useReducer(reducer, { count3: 0, count4: 0 });
