@@ -7,10 +7,10 @@ function Demo4() {
 
   return (
     <div>
-      <div>{count3}</div>
+      <div>{count3.value}</div>
       <button
         onClick={() => {
-          setCount3(count3 + 1);
+          setCount3(count3.value + 1);
         }}
       >
         click3
